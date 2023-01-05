@@ -20,7 +20,7 @@ RSpec.describe GbTrainNetwork::SegmentCalculator do
     calculator.segments.each do |segment|
       pp [segment.source_station, segment.target_station]
       expected_segment = expected_segments.find do |e_segment| 
-        segment.matches_bidirectionally?(e_segment)
+        segment.matches_bidirectionally?(e_segment.source_station, e_segment.target_station)
       end
 
       expect(expected_segment).to_not be_nil
@@ -43,8 +43,8 @@ RSpec.describe GbTrainNetwork::SegmentCalculator do
   def expected_segments
     expected_segment_data.map do |expected_segment_datum|
       GbTrainNetwork::Segment.new(
-        source_station: expected_segment_datum[0],
-        target_station: expected_segment_datum[1]
+        source_station: stations.find { |s| s.id == expected_segment_datum[0] },
+        target_station: stations.find { |s| s.id ==  expected_segment_datum[1] }
       )
     end
   end
