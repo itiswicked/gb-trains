@@ -1,8 +1,6 @@
 RSpec.describe GbTrainNetwork::SegmentCalculator do
-  # TODO: I think a better way to do this is to have a segment passed two stations to
-  # see if the segment is valid for them. This eliminates need to create additional segments
-  # segment_a.matches_stations?(station_1, station_2) => true
-  # segment_a.matches_stations?(station_2, station_1) => true
+
+  # TODO: Move this into segment_spec.rb
   it "can determine if two segment objects represent the same network segment bidirectionally" do
     # TODO: install rspec-mocks and use verifying doubles
     station_1 = GbTrainNetwork::Station.new(1, "1", {})
@@ -11,12 +9,10 @@ RSpec.describe GbTrainNetwork::SegmentCalculator do
     segment_a = GbTrainNetwork::Segment.new(source_station: station_1, target_station: station_2)
     segment_b = GbTrainNetwork::Segment.new(source_station: station_2, target_station: station_1)
     segment_c = GbTrainNetwork::Segment.new(source_station: station_2, target_station: station_3)
-    segment_d = GbTrainNetwork::Segment.new(source_station: station_2, target_station: station_3)
 
-
-    expect(segment_a.matches_bidirectionally?(segment_b)).to eq(true)
-    expect(segment_b.matches_bidirectionally?(segment_c)).to eq(false)
-    expect(segment_c.matches_bidirectionally?(segment_d)).to eq(true)
+    expect(segment_a.matches_bidirectionally?(station_2, station_1)).to eq(true)
+    expect(segment_b.matches_bidirectionally?(station_2, station_3)).to eq(false)
+    expect(segment_c.matches_bidirectionally?(station_2, station_3)).to eq(true)
   end
   
   it "returns all network segment information in an array" do

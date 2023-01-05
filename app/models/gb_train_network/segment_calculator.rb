@@ -24,18 +24,14 @@ module GbTrainNetwork
 
       # add the relevant segments
       connected_segments.each do |segment|
-        # require 'pry';binding.pry
-
         if segment_not_accounted_for?(segment)
           @segments << segment
           next_station_to_visit = @stations.find { |station| station.id == segment.target_station }
           
-          # Recurse!
           if next_station_to_visit.nil?
             raise "Station with id: #{segment.target_station} not found!"
           end
           
-          puts "Recurse!"
           # require 'pry';binding.pry if next_station_to_visit.nil?
           get_segments_from_station(next_station_to_visit)
         end
