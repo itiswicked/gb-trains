@@ -28,7 +28,7 @@ module GbTrainNetwork
         end
       end
 
-    attr_reader :connections, :name, :id
+    attr_reader :connections, :name, :id, :coordinates
 
     def initialize(id, name, coordinates, connections = [])
       @id = id
@@ -46,7 +46,7 @@ module GbTrainNetwork
     end
 
     def connection_exists?(station)
-      connections.include?(station)
+      connections.include?(station.id)
     end
   end
 end
