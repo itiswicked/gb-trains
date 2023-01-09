@@ -5,7 +5,6 @@ module GbTrainNetwork
       @segments ||= []
     end
 
-    # segments needs a station passed to it somehow in order to be recursive
     def segments
       return @segments if !@segments.empty?
       
