@@ -5,7 +5,7 @@ module GbTrainNetwork
 
   class Helpers
     def self.calculate_station_distance(station_a, station_b)
-      unless station_a.connection_exists?(station_b) && station_b.connection_exists?(station_a)
+      unless station_a.connection_exists?(station_b.id) && station_b.connection_exists?(station_a.id)
         raise UnconnectedStationError, "Distance between stations cannot be determined, as they are not adjacent."
       end
 
