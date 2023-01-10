@@ -16,5 +16,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource "/map",
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
+    
+    resource "/journeys",
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end

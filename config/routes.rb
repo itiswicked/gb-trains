@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get "/stations", to: "stations#index"
   get "/map", to: "map#index"
 
+  resources :journeys, only: [:create]
 end

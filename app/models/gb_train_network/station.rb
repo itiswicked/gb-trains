@@ -13,7 +13,6 @@ module GbTrainNetwork
 
       def self.stations_from_data(station_data)
         station_data.map do |station_datum|
-          # Refactor to swallow all data as one arg
           station = Station.new(station_datum["id"], station_datum["name"], station_datum["coordinates"])
           add_conntections_to_station(station, station_datum["connections"])
 
@@ -28,8 +27,9 @@ module GbTrainNetwork
         end
       end
 
-    attr_reader :connections, :name, :id
+    attr_reader :connections, :name, :id, :coordinates
 
+    # Refactor to swallow all data as one arg
     def initialize(id, name, coordinates, connections = [])
       @id = id
       @name = name
@@ -45,8 +45,8 @@ module GbTrainNetwork
       connections << connecting_station
     end
 
-    def connection_exists?(station)
-      connections.include?(station)
+    def connection_exists?(station_id)
+      connections.include?(station_id)
     end
   end
 end
